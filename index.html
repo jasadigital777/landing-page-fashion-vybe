@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYBE — Fashion Anak Muda Indonesia</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --hitam: #080808;
+  --putih: #f4efe8;
+  --kuning: #f0d000;
+  --merah: #d93025;
+  --abu: #161616;
+  --abu2: #232323;
+  --abu3: #2e2e2e;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--hitam);
+  color: var(--putih);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════
+   NAVBAR
+══════════════════════════ */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 200;
+  background: rgba(8,8,8,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(240,208,0,0.12);
+  transition: box-shadow .3s;
+}
+.nav-top {
+  background: var(--kuning);
+  text-align: center;
+  padding: 7px 16px;
+  font-size: .72rem; font-weight: 700;
+  letter-spacing: 2px; color: var(--hitam);
+  text-transform: uppercase;
+}
+.nav-main {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 48px; height: 64px;
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; letter-spacing: 5px;
+  color: var(--kuning); text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex; gap: 0; list-style: none;
+  position: absolute; left: 50%; transform: translateX(-50%);
+}
+.nav-links li a {
+  display: block; padding: 20px 18px;
+  color: rgba(244,239,232,0.7); text-decoration: none;
+  font-size: .82rem; font-weight: 500;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  transition: color .2s; position: relative;
+}
+.nav-links li a::after {
+  content: '';
+  position: absolute; bottom: 14px; left: 18px; right: 18px;
+  height: 2px; background: var(--kuning);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .25s;
+}
+.nav-links li a:hover { color: var(--putih); }
+.nav-links li a:hover::after { transform: scaleX(1); }
+.nav-kanan { display: flex; align-items: center; gap: 10px; }
+.nav-ikon {
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  color: var(--putih); font-size: 1.05rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: border-color .2s, color .2s;
+  cursor: pointer; background: none;
+}
+.nav-ikon:hover { border-color: var(--kuning); color: var(--kuning); }
+.keranjang-wrap { position: relative; }
+.keranjang-badge {
+  position: absolute; top: -6px; right: -6px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--merah); color: white;
+  font-size: .6rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.tombol-nav {
+  background: var(--kuning); color: var(--hitam);
+  padding: 10px 22px; border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700; font-size: .8rem;
+  letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; transition: opacity .2s, transform .2s; white-space: nowrap;
+}
+.tombol-nav:hover { opacity: .88; transform: translateY(-1px); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none;
+}
+.hamburger span { width: 24px; height: 2px; background: var(--putih); display: block; }
+
+/* Mobile menu */
+.overlay-mob {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.75); z-index: 250;
+}
+.overlay-mob.buka { display: block; }
+.menu-mob {
+  position: fixed; top: 0; right: -100%; width: 78%; max-width: 300px; height: 100vh;
+  background: var(--abu); z-index: 300;
+  padding: 72px 36px 40px;
+  display: flex; flex-direction: column;
+  transition: right .3s;
+}
+.menu-mob.buka { right: 0; }
+.menu-mob a {
+  display: block; padding: 16px 0;
+  color: var(--putih); text-decoration: none;
+  font-size: 1.1rem; font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  transition: color .2s;
+}
+.menu-mob a:hover { color: var(--kuning); }
+.tutup-mob {
+  position: absolute; top: 20px; right: 20px;
+  background: none; border: none; color: var(--putih); font-size: 1.5rem; cursor: pointer;
+}
+
+/* ══════════════════════════
+   1. HERO (UPDATED BAHASA)
+══════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 104px;
+  position: relative; overflow: hidden;
+}
+.hero-kiri {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 64px 56px; position: relative; z-index: 2;
+}
+.hero-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 28px; animation: naik .6s ease both;
+}
+.hero-label span {
+  background: var(--kuning); color: var(--hitam);
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; padding: 5px 12px;
+}
+.hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--merah); animation: kedip 1.5s infinite; }
+.hero-judul {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4.5rem, 9vw, 8.5rem);
+  line-height: .88; letter-spacing: 2px;
+  animation: naik .6s .1s ease both;
+}
+.hero-judul .outline { -webkit-text-stroke: 2px var(--putih); color: transparent; }
+.hero-sub {
+  font-size: 1.05rem; font-weight: 400; line-height: 1.7;
+  max-width: 420px; margin: 28px 0 40px;
+  color: rgba(244,239,232,.72); animation: naik .6s .2s ease both;
+}
+.hero-tombol { display: flex; gap: 14px; flex-wrap: wrap; animation: naik .6s .3s ease both; }
+.tombol-utama {
+  background: var(--kuning); color: var(--hitam);
+  padding: 16px 36px; border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700; font-size: .95rem; letter-spacing: .5px; text-transform: uppercase;
+  cursor: pointer; transition: transform .2s, opacity .2s;
+}
+.tombol-utama:hover { transform: translateY(-2px); opacity: .9; }
+.tombol-sekunder {
+  background: transparent; color: var(--putih);
+  padding: 16px 36px; border: 1px solid rgba(244,239,232,.3);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600; font-size: .95rem; letter-spacing: .5px; text-transform: uppercase;
+  cursor: pointer; transition: border-color .2s, color .2s;
+}
+.tombol-sekunder:hover { border-color: var(--kuning); color: var(--kuning); }
+.hero-statistik {
+  display: flex; gap: 40px; margin-top: 56px;
+  padding-top: 32px; border-top: 1px solid rgba(255,255,255,.08);
+  animation: naik .6s .4s ease both;
+}
+.stat-angka {
+  display: block; font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem; color: var(--kuning); letter-spacing: 1px;
+}
+.stat-label {
+  font-size: .7rem; text-transform: uppercase;
+  letter-spacing: 2px; color: rgba(244,239,232,.45);
+}
+
+.hero-kanan { position: relative; overflow: hidden; }
+.hero-foto-utama { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-foto-wrapper { width: 100%; height: 100%; position: relative; }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, var(--hitam) 0%, transparent 20%);
+  z-index: 1;
+}
+.hero-badge {
+  position: absolute; top: 36px; right: 36px; z-index: 2;
+  width: 96px; height: 96px; border-radius: 50%;
+  background: var(--kuning); color: var(--hitam);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: .9rem; letter-spacing: 2px;
+  text-align: center; line-height: 1.3; animation: putar 12s linear infinite;
+}
+.hero-produk-tag {
+  position: absolute; bottom: 72px; right: 28px; z-index: 2;
+  background: rgba(8,8,8,.9); backdrop-filter: blur(8px);
+  border: 1px solid rgba(240,208,0,.2); padding: 16px 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-produk-thumb { width: 48px; height: 48px; object-fit: cover; flex-shrink: 0; }
+.hero-produk-info span {
+  display: block; font-size: .65rem;
+  text-transform: uppercase; letter-spacing: 2px; color: var(--kuning); margin-bottom: 3px;
+}
+.hero-produk-info strong { font-size: .9rem; }
+
+.ticker-wrap {
+  position: absolute; bottom: 0; width: 100%; z-index: 3;
+  background: var(--kuning); overflow: hidden; padding: 9px 0;
+}
+.ticker-isi {
+  display: inline-block; white-space: nowrap;
+  animation: ticker 24s linear infinite;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .95rem; letter-spacing: 4px; color: var(--hitam);
+}
+
+/* ══════════════════════════
+   SEKSI UMUM
+══════════════════════════ */
+.eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 14px; }
+.eyebrow-kuning { color: var(--kuning); }
+.eyebrow-redup { color: rgba(244,239,232,.35); }
+.judul-seksi-tengah { text-align: center; margin-bottom: 56px; }
+.judul-seksi-tengah h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem); letter-spacing: 2px; line-height: 1;
+}
+.judul-seksi-tengah p { font-size: .95rem; color: rgba(244,239,232,.5); margin-top: 12px; }
+
+/* ══════════════════════════
+   2. MASALAH
+══════════════════════════ */
+#masalah {
+  background: var(--kuning); color: var(--hitam);
+  padding: 96px 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+}
+.masalah-judul {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 5vw, 5.5rem); line-height: .92; letter-spacing: 1px;
+}
+.kartu-masalah { display: flex; flex-direction: column; gap: 16px; }
+.kartu {
+  background: rgba(0,0,0,.07); padding: 22px 26px;
+  border-left: 4px solid var(--hitam); transition: background .2s;
+}
+.kartu:hover { background: rgba(0,0,0,.14); }
+.kartu h4 { font-weight: 700; margin-bottom: 5px; font-size: .95rem; }
+.kartu p { font-size: .88rem; opacity: .72; line-height: 1.6; }
+
+/* ══════════════════════════
+   3. SOLUSI
+══════════════════════════ */
+#solusi { padding: 96px 64px; background: var(--hitam); }
+.grid-layanan { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.kartu-layanan {
+  background: var(--abu); padding: 44px 32px;
+  border: 1px solid rgba(255,255,255,.04);
+  position: relative; overflow: hidden;
+  transition: background .3s, transform .3s;
+}
+.kartu-layanan::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 3px; background: var(--kuning);
+  transform: scaleX(0); transform-origin: left; transition: transform .3s;
+}
+.kartu-layanan:hover { background: var(--abu2); transform: translateY(-4px); }
+.kartu-layanan:hover::before { transform: scaleX(1); }
+.nomor-lay {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem; color: rgba(240,208,0,.1); line-height: 1; margin-bottom: 18px;
+}
+.ikon-lay { font-size: 2rem; margin-bottom: 14px; }
+.kartu-layanan h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+.kartu-layanan p { font-size: .88rem; color: rgba(244,239,232,.58); line-height: 1.7; }
+
+/* ══════════════════════════
+   4. PRODUK
+══════════════════════════ */
+#produk { padding: 96px 64px; background: #0b0b0b; }
+.filter-produk {
+  display: flex; justify-content: center; gap: 0; margin: 40px 0 52px; flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 10px 28px; border: 1px solid rgba(255,255,255,.1);
+  background: none; color: rgba(244,239,232,.6);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; transition: all .2s; margin: -1px;
+}
+.filter-btn.aktif, .filter-btn:hover { background: var(--kuning); color: var(--hitam); border-color: var(--kuning); }
+.grid-produk { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.kartu-produk {
+  position: relative; overflow: hidden;
+  background: var(--abu); cursor: pointer; transition: transform .3s;
+}
+.kartu-produk:hover { transform: translateY(-4px); }
+.foto-produk-wrap { aspect-ratio: 3/4; overflow: hidden; position: relative; }
+.foto-produk-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform .5s;
+}
+.kartu-produk:hover .foto-produk-wrap img { transform: scale(1.07); }
+.badge-produk {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--merah); color: white;
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 5px 10px; z-index: 2;
+}
+.badge-produk.baru { background: var(--kuning); color: var(--hitam); }
+.badge-produk.terlaris { background: #7c3aed; }
+.overlay-produk {
+  position: absolute; inset: 0; background: rgba(8,8,8,.88);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  opacity: 0; transition: opacity .3s; z-index: 3;
+}
+.kartu-produk:hover .overlay-produk { opacity: 1; }
+.tombol-overlay {
+  background: var(--kuning); color: var(--hitam); padding: 12px 28px; border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700; font-size: .82rem; letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; width: 80%; text-align: center;
+}
+.tombol-overlay.gh {
+  background: transparent; color: var(--putih);
+  border: 1px solid rgba(244,239,232,.4);
+}
+.info-produk { padding: 16px 16px 20px; }
+.kat-produk {
+  font-size: .65rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--kuning); margin-bottom: 5px;
+}
+.nama-produk { font-size: .95rem; font-weight: 600; margin-bottom: 8px; }
+.harga-wrap { display: flex; align-items: center; gap: 10px; }
+.harga { font-size: 1rem; font-weight: 700; }
+.harga-asli { font-size: .82rem; color: rgba(244,239,232,.4); text-decoration: line-through; }
+.rating-baris { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+.rating-baris span { font-size: .75rem; color: rgba(244,239,232,.45); }
+.bintang-kecil { color: var(--kuning); font-size: .75rem; letter-spacing: 1px; }
+
+/* ══════════════════════════
+   5. TESTIMONI
+══════════════════════════ */
+#testimoni { padding: 96px 64px; background: var(--hitam); }
+.grid-testi { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 56px; }
+.kartu-testi {
+  background: var(--abu); padding: 32px;
+  border: 1px solid rgba(255,255,255,.05); position: relative;
+}
+.kartu-testi::before {
+  content: '"'; position: absolute; top: 12px; right: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5rem; color: rgba(240,208,0,.09); line-height: 1;
+}
+.bintang { color: var(--kuning); font-size: .9rem; margin-bottom: 14px; letter-spacing: 2px; }
+.teks-testi { font-size: .9rem; line-height: 1.75; color: rgba(244,239,232,.78); margin-bottom: 22px; }
+.pngguna { display: flex; align-items: center; gap: 12px; }
+.avatar-foto { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+.avatar-foto img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-huruf {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--kuning); color: var(--hitam);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: .95rem; flex-shrink: 0;
+}
+.nama-testi { font-weight: 600; font-size: .88rem; }
+.handle-testi { font-size: .74rem; color: rgba(244,239,232,.38); }
+
+/* ══════════════════════════
+   6. TENTANG KAMI
+══════════════════════════ */
+#tentang { display: grid; grid-template-columns: 1fr 1fr; background: var(--abu); }
+.tentang-visual { position: relative; min-height: 520px; overflow: hidden; }
+.foto-grid { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+.foto-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.foto-grid img:hover { transform: scale(1.04); }
+.tengah-label {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center; pointer-events: none;
+}
+.tengah-label-box {
+  background: rgba(8,8,8,.88); backdrop-filter: blur(8px);
+  border: 1px solid rgba(240,208,0,.25); padding: 20px 28px; text-align: center;
+}
+.tengah-label-box span {
+  display: block; font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; color: var(--kuning); letter-spacing: 4px;
+}
+.tengah-label-box p { font-size: .72rem; letter-spacing: 3px; text-transform: uppercase; opacity: .6; margin-top: 4px; }
+.tentang-konten {
+  padding: 72px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.tentang-konten h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 4.5rem); line-height: .95; margin-bottom: 22px;
+}
+.tentang-konten p {
+  font-size: .95rem; line-height: 1.8;
+  color: rgba(244,239,232,.68); margin-bottom: 18px;
+}
+.angka-tentang { display: flex; gap: 36px; margin-top: 12px; }
+.angka-item span:first-child {
+  display: block; font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem; color: var(--kuning); letter-spacing: 1px;
+}
+.angka-item span:last-child { font-size: .68rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(244,239,232,.38); }
+
+/* ══════════════════════════
+   7. FAQ
+══════════════════════════ */
+#faq {
+  padding: 96px 64px; background: var(--hitam);
+  display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start;
+}
+.faq-kiri h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 5vw, 5rem); line-height: 1;
+}
+.faq-kiri p { font-size: .9rem; color: rgba(244,239,232,.55); margin-top: 14px; line-height: 1.7; }
+.faq-kiri .tombol-utama { margin-top: 28px; }
+.daftar-faq { display: flex; flex-direction: column; }
+.item-faq { border-bottom: 1px solid rgba(255,255,255,.07); padding: 26px 0; cursor: pointer; }
+.pertanyaan-faq {
+  display: flex; justify-content: space-between; align-items: center;
+  font-weight: 600; font-size: .95rem;
+}
+.ikon-faq { color: var(--kuning); font-size: 1.3rem; transition: transform .3s; flex-shrink: 0; margin-left: 16px; }
+.jawaban-faq {
+  font-size: .88rem; color: rgba(244,239,232,.58); line-height: 1.7;
+  max-height: 0; overflow: hidden; transition: max-height .35s, margin .3s;
+}
+.item-faq.buka .jawaban-faq { max-height: 200px; margin-top: 14px; }
+.item-faq.buka .ikon-faq { transform: rotate(45deg); }
+
+/* ══════════════════════════
+   8. CTA (UPDATED BAHASA)
+══════════════════════════ */
+#cta {
+  background: var(--kuning); padding: 112px 64px;
+  text-align: center; position: relative; overflow: hidden;
+}
+#cta::before {
+  content: 'VYBE'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(12rem, 25vw, 28rem);
+  color: rgba(0,0,0,.04); letter-spacing: 10px; white-space: nowrap; user-select: none;
+}
+.label-cta { font-size: .72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,.45); margin-bottom: 14px; }
+.judul-cta {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 8vw, 9rem);
+  color: var(--hitam); line-height: .95; margin-bottom: 20px; position: relative;
+}
+.sub-cta { font-size: 1.05rem; color: rgba(0,0,0,.62); margin-bottom: 44px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.form-cta { display: flex; max-width: 500px; margin: 0 auto; }
+.form-cta input {
+  flex: 1; padding: 18px 22px; border: none;
+  background: var(--hitam); color: var(--putih);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: .95rem; outline: none;
+}
+.form-cta input::placeholder { color: rgba(244,239,232,.35); }
+.form-cta button {
+  background: var(--merah); color: white; border: none; padding: 18px 28px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: .85rem;
+  letter-spacing: 1px; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: opacity .2s;
+}
+.form-cta button:hover { opacity: .88; }
+.garansi-cta { font-size: .75rem; color: rgba(0,0,0,.45); margin-top: 16px; position: relative; }
+
+/* ══════════════════════════
+   9. FOOTER
+══════════════════════════ */
+footer { background: var(--hitam); border-top: 1px solid rgba(255,255,255,.07); padding: 64px 64px 36px; }
+.footer-atas { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px; }
+.footer-brand .logo { display: block; margin-bottom: 14px; font-size: 2rem; }
+.footer-brand p { font-size: .88rem; color: rgba(244,239,232,.45); line-height: 1.7; max-width: 250px; }
+.sosial-footer { display: flex; gap: 10px; margin-top: 22px; }
+.btn-sosial {
+  width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .82rem; font-weight: 700; text-decoration: none; color: var(--putih);
+  transition: border-color .2s, color .2s;
+}
+.btn-sosial:hover { border-color: var(--kuning); color: var(--kuning); }
+.kol-footer h5 { font-size: .68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(244,239,232,.35); margin-bottom: 20px; }
+.kol-footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.kol-footer ul a { font-size: .88rem; color: rgba(244,239,232,.6); text-decoration: none; transition: color .2s; }
+.kol-footer ul a:hover { color: var(--kuning); }
+.footer-bawah {
+  border-top: 1px solid rgba(255,255,255,.07); padding-top: 26px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.footer-bawah p { font-size: .78rem; color: rgba(244,239,232,.3); }
+.footer-bawah a { color: var(--kuning); text-decoration: none; }
+
+/* ══════════════════════════
+   ANIMASI
+══════════════════════════ */
+@keyframes naik { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+@keyframes putar { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+@keyframes kedip { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+@keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+/* ══════════════════════════
+   RESPONSIF
+══════════════════════════ */
+@media (max-width: 1024px) {
+  .grid-produk { grid-template-columns: repeat(3,1fr); }
+}
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .tombol-nav { display: none; }
+  .nav-main { padding: 0 20px; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-kanan { display: none; }
+  .hero-kiri { padding: 40px 24px; }
+  #masalah { grid-template-columns: 1fr; padding: 60px 24px; }
+  #solusi { padding: 60px 24px; }
+  .grid-layanan { grid-template-columns: 1fr; }
+  #produk { padding: 60px 24px; }
+  .grid-produk { grid-template-columns: repeat(2,1fr); }
+  #testimoni { padding: 60px 24px; }
+  .grid-testi { grid-template-columns: 1fr; }
+  #tentang { grid-template-columns: 1fr; }
+  .tentang-konten { padding: 48px 24px; }
+  #faq { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+  #cta { padding: 72px 24px; }
+  .form-cta { flex-direction: column; }
+  footer { padding: 48px 24px 28px; }
+  .footer-atas { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 480px) {
+  .grid-produk { grid-template-columns: 1fr; }
+  .footer-atas { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Overlay & Mobile Menu -->
+<div class="overlay-mob" id="overlay" onclick="tutupMenu()"></div>
+<div class="menu-mob" id="menuMob">
+  <button class="tutup-mob" onclick="tutupMenu()">✕</button>
+  <a href="#produk" onclick="tutupMenu()">Koleksi</a>
+  <a href="#tentang" onclick="tutupMenu()">Tentang Kami</a>
+  <a href="#testimoni" onclick="tutupMenu()">Testimoni</a>
+  <a href="#faq" onclick="tutupMenu()">FAQ</a>
+  <a href="#cta" onclick="tutupMenu()" style="color:var(--kuning);margin-top:16px;border-bottom:none;">Gabung Sekarang →</a>
+</div>
+
+<!-- ── NAVBAR (UPDATED MENU & CTA) ── -->
+<nav id="navbar">
+  <div class="nav-top">
+    🚚 Gratis Ongkir ke Seluruh Indonesia — Min. Rp150.000 &nbsp;|&nbsp; Drop Baru Setiap Jumat!
+  </div>
+  <div class="nav-main">
+    <a href="#hero" class="logo">VYBE</a>
+    <ul class="nav-links">
+      <li><a href="#hero">Beranda</a></li>
+      <li><a href="#produk">Koleksi</a></li>
+      <li><a href="#tentang">Tentang Kami</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-kanan">
+      <button class="nav-ikon" title="Cari">🔍</button>
+      <div class="keranjang-wrap">
+        <button class="nav-ikon" title="Keranjang">🛒</button>
+        <span class="keranjang-badge">2</span>
+      </div>
+      <button class="tombol-nav" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Gabung Sekarang →</button>
+      <button class="hamburger" onclick="bukaMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── 1. HERO (UPDATED TAGLINE INDO) ── -->
+<section id="hero">
+  <div class="hero-kiri">
+    <div class="hero-label">
+      <span>SS 2025 — Edisi Terbatas</span>
+      <div class="hero-dot"></div>
+    </div>
+    <h1 class="hero-judul">
+      TAMPIL BEDA.<br>
+      <span class="outline">TANPA DRAMA.</span>
+    </h1>
+    <p class="hero-sub">Fashion streetwear premium yang nyaman di kantong. Koleksi terbatas biar lo nggak ketemu baju yang sama di jalanan.</p>
+    <div class="hero-tombol">
+      <button class="tombol-utama" onclick="document.getElementById('produk').scrollIntoView({behavior:'smooth'})">Belanja Sekarang</button>
+      <button class="tombol-sekunder" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Dapatkan Diskon 15%</button>
+    </div>
+    <div class="hero-statistik">
+      <div>
+        <span class="stat-angka">15K+</span>
+        <span class="stat-label">Pelanggan Puas</span>
+      </div>
+      <div>
+        <span class="stat-angka">4.9★</span>
+        <span class="stat-label">Rating Produk</span>
+      </div>
+      <div>
+        <span class="stat-angka">200+</span>
+        <span class="stat-label">Pilihan Item</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-kanan">
+    <div class="hero-foto-wrapper">
+      <img class="hero-foto-utama"
+        src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=900&q=80&fit=crop"
+        alt="Fashion Anak Muda VYBE">
+      <div class="hero-overlay"></div>
+      <div class="hero-badge">NEW<br>DROP<br>SS25</div>
+      <div class="hero-produk-tag">
+        <img class="hero-produk-thumb"
+          src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=96&q=80&fit=crop"
+          alt="produk terlaris">
+        <div class="hero-produk-info">
+          <span>Terlaris Minggu Ini</span>
+          <strong>Oversized Tee — Rp185.000</strong>
+        </div>
+      </div>
+    </div>
+    <div class="ticker-wrap">
+      <span class="ticker-isi">
+        STREETWEAR &nbsp;✦&nbsp; GRATIS ONGKIR &nbsp;✦&nbsp; DROP BARU TIAP JUMAT &nbsp;✦&nbsp; FASHION ANAK MUDA &nbsp;✦&nbsp; KUALITAS PREMIUM &nbsp;✦&nbsp; HARGA TERJANGKAU &nbsp;✦&nbsp;
+        STREETWEAR &nbsp;✦&nbsp; GRATIS ONGKIR &nbsp;✦&nbsp; DROP BARU TIAP JUMAT &nbsp;✦&nbsp; FASHION ANAK MUDA &nbsp;✦&nbsp; KUALITAS PREMIUM &nbsp;✦&nbsp; HARGA TERJANGKAU &nbsp;✦&nbsp;
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ── 2. MASALAH ── -->
+<section id="masalah">
+  <div>
+    <p class="eyebrow">Kenapa Harus VYBE?</p>
+    <h2 class="masalah-judul">CAPEK<br>SAMA<br>FASHION<br>YANG<br>ITU-ITU<br>AJA?</h2>
+  </div>
+  <div class="kartu-masalah">
+    <div class="kartu">
+      <h4>😤 Outfit pasaran, semua sama</h4>
+      <p>Masuk kelas, ketemu 5 orang pakai baju identik. Beli di toko yang sama, gaya yang sama. Gitu-gitu aja.</p>
+    </div>
+    <div class="kartu">
+      <h4>💸 Harga brand mahal, nggak masuk akal</h4>
+      <p>Mau tampil keren tapi kantong mahasiswa. Brand lokal banyak yang kualitasnya nggak sebanding harganya.</p>
+    </div>
+    <div class="kartu">
+      <h4>📦 Foto keren, barang nggak sesuai</h4>
+      <p>Ekspektasi tinggi, realita kecewa. Bahan tipis, jahitan amburadul, warna beda dari foto di toko online.</p>
+    </div>
+    <div class="kartu">
+      <h4>🤷 Bingung mix &amp; match sendiri</h4>
+      <p>Lemari penuh tapi nggak tau dipaduin apa. Akhirnya outfit boring terus setiap hari tanpa variasi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. SOLUSI / LAYANAN ── -->
+<section id="solusi">
+  <div class="judul-seksi-tengah">
+    <p class="eyebrow eyebrow-kuning">Solusi VYBE</p>
+    <h2>INI YANG KITA<br>TAWARKAN</h2>
+    <p>Gaya lo. Aturan lo. Budget lo.</p>
+  </div>
+  <div class="grid-layanan">
+    <div class="kartu-layanan">
+      <div class="nomor-lay">01</div>
+      <div class="ikon-lay">👕</div>
+      <h3>Koleksi Terbatas</h3>
+      <p>Setiap koleksi diproduksi dalam jumlah terbatas. Lo selalu tampil unik dan nggak bakal kesamaan sama orang lain.</p>
+    </div>
+    <div class="kartu-layanan">
+      <div class="nomor-lay">02</div>
+      <div class="ikon-lay">🧵</div>
+      <h3>Kualitas Premium</h3>
+      <p>Bahan premium pilihan, jahitan rapi, dan uji cuci ketat. Apa yang lo lihat di foto, itu yang lo terima.</p>
+    </div>
+    <div class="kartu-layanan">
+      <div class="nomor-lay">03</div>
+      <div class="ikon-lay">💰</div>
+      <h3>Harga Ramah Kantong</h3>
+      <p>Mulai dari Rp149.000. Kualitas setara brand ternama, harga brand lokal. Tampil keren tanpa boncos.</p>
+    </div>
+    <div class="kartu-layanan">
+      <div class="nomor-lay">04</div>
+      <div class="ikon-lay">🎨</div>
+      <h3>Panduan Gaya Gratis</h3>
+      <p>Setiap produk dilengkapi panduan mix & match. Tau cara paduinnya, outfit lo auto naik kelas.</p>
+    </div>
+    <div class="kartu-layanan">
+      <div class="nomor-lay">05</div>
+      <div class="ikon-lay">🚚</div>
+      <h3>Gratis Ongkir</h3>
+      <p>Gratis ongkir ke seluruh Indonesia untuk setiap pembelian. Belanja santai dari kamar sendiri.</p>
+    </div>
+    <div class="kartu-layanan">
+      <div class="nomor-lay">06</div>
+      <div class="ikon-lay">🔄</div>
+      <h3>Retur Mudah 7 Hari</h3>
+      <p>Nggak sesuai atau nggak cocok? Retur gampang dalam 7 hari. No drama, no ribet, dijamin beres.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 4. PRODUK / PORTFOLIO ── -->
+<section id="produk">
+  <div class="judul-seksi-tengah">
+    <p class="eyebrow eyebrow-kuning">Koleksi Kami</p>
+    <h2>PILIH GAYA<br>KAMU</h2>
+    <p>Koleksi SS 2025 — Stok Terbatas</p>
+  </div>
+  <div class="filter-produk">
+    <button class="filter-btn aktif" onclick="filterProduk(this,'semua')">Semua</button>
+    <button class="filter-btn" onclick="filterProduk(this,'atasan')">Atasan</button>
+    <button class="filter-btn" onclick="filterProduk(this,'outer')">Outer</button>
+    <button class="filter-btn" onclick="filterProduk(this,'bawahan')">Bawahan</button>
+    <button class="filter-btn" onclick="filterProduk(this,'aksesori')">Aksesori</button>
+  </div>
+  <div class="grid-produk">
+
+    <div class="kartu-produk" data-kategori="atasan">
+      <div class="foto-produk-wrap">
+        <span class="badge-produk terlaris">Terlaris</span>
+        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&q=80&fit=crop" alt="Oversized Tee Monochrome">
+        <div class="overlay-produk">
+          <button class="tombol-overlay">Tambah ke Keranjang</button>
+          <button class="tombol-overlay gh">Lihat Detail</button>
+        </div>
+      </div>
+      <div class="info-produk">
+        <div class="kat-produk">Atasan</div>
+        <div class="nama-produk">Oversized Tee Monochrome</div>
+        <div class="harga-wrap"><span class="harga">Rp185.000</span><span class="harga-asli">Rp250.000</span></div>
+        <div class="rating-baris"><span class="bintang-kecil">★★★★★</span><span>(248 ulasan)</span></div>
+      </div>
+    </div>
+
+    <div class="kartu-produk" data-kategori="outer">
+      <div class="foto-produk-wrap">
+        <span class="badge-produk baru">Baru</span>
+        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80&fit=crop" alt="Varsity Jacket Street">
+        <div class="overlay-produk">
+          <button class="tombol-overlay">Tambah ke Keranjang</button>
+          <button class="tombol-overlay gh">Lihat Detail</button>
+        </div>
+      </div>
+      <div class="info-produk">
+        <div class="kat-produk">Outer</div>
+        <div class="nama-produk">Varsity Jacket Street</div>
+        <div class="harga-wrap"><span class="harga">Rp450.000</span></div>
+        <div class="rating-baris"><span class="bintang-kecil">★★★★★</span><span>(89 ulasan)</span></div>
+      </div>
+    </div>
+
+    <div class="kartu-produk" data-kategori="bawahan">
+      <div class="foto-produk-wrap">
+        <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&q=80&fit=crop" alt="Cargo Pants Urban">
+        <div class="overlay-produk">
+          <button class="tombol-overlay">Tambah ke Keranjang</button>
+          <button class="tombol-overlay gh">Lihat Detail</button>
+        </div>
+      </div>
+      <div class="info-produk">
+        <div class="kat-produk">Bawahan</div>
+        <div class="nama-produk">Cargo Pants Urban</div>
+        <div class="harga-wrap"><span class="harga">Rp320.000</span><span class="harga-asli">Rp380.000</span></div>
+        <div class="rating-baris"><span class="bintang-kecil">★★★★☆</span><span>(176 ulasan)</span></div>
+      </div>
+    </div>
+
+    <div class="kartu-produk" data-kategori="atasan">
+      <div class="foto-produk-wrap">
+        <span class="badge-produk">Diskon</span>
+        <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80&fit=crop" alt="Cropped Hoodie Y2K">
+        <div class="overlay-produk">
+          <button class="tombol-overlay">Tambah ke Keranjang</button>
+          <button class="tombol-overlay gh">Lihat Detail</button>
+        </div>
+      </div>
+      <div class="info-produk">
+        <div class="kat-produk">Atasan</div>
+        <div class="nama-produk">Cropped Hoodie Y2K</div>
+        <div class="harga-wrap"><span class="harga">Rp275.000</span><span class="harga-asli">Rp340.000</span></div>
+        <div class="rating-baris"><span class="bintang-kecil">★★★★★</span><span>(312 ulasan)</span></div>
+      </div>
+    </div>
+
+    <div class="kartu-produk" data-kategori="aksesori">
+      <div class="foto-produk-wrap">
+        <span class="badge-produk baru">Baru</span>
+        <img src="https://images.unsplash.com/photo-1588117305388-c2631a279f82?w=600&q=80&fit=crop" alt="Bucket Hat Premium">
+        <div class="overlay-produk">
+          <button class="tombol-overlay">Tambah ke Keranjang</button>
+          <button class="tombol-overlay gh">Lihat Detail</button>
+        </div>
+      </div>
+      <div class="info-produk">
+        <div class="kat-produk">Aksesori</div>
+        <div class="nama-produk">Bucket Hat Premium</div>
+        <div class="harga-wrap"><span class="harga">Rp149.000</span></div>
+        <div class="rating-baris"><span class="bintang-kecil">★★★★★</span><span>(94 ulasan)</span></div>
+      </div>
+    </div>
+
+    <div class="kartu-produk" data-kategori="outer">
+      <div class="foto-produk-wrap">
+        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80&fit=crop" alt="Windbreaker Retro">
+        <div class="overlay-produk">
+          <button class="tombol-overlay">Tambah ke Keranjang</button>
+          <button class="tombol-overlay gh">Lihat Detail</button>
+        </div>
+      </div>
+      <div class="info-produk">
+        <div class="kat-produk">Outer</div>
+        <div class="nama-produk">Windbreaker Retro</div>
+        <div class="harga-wrap"><span class="harga">Rp395.000</span><span class="harga-asli">Rp480.000</span></div>
+        <div class="rating-baris"><span class="bintang-kecil">★★★★☆</span><span>(57 ulasan)</span></div>
+      </div>
+    </div>
+
+    <div class="kartu-produk" data-kategori="bawahan">
+      <div class="foto-produk-wrap">
+        <span class="badge-produk terlaris">Terlaris</span>
+        <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?w=600&q=80&fit=crop" alt="Wide Leg Trousers">
+        <div class="overlay-produk">
+          <button class="tombol-overlay">Tambah ke Keranjang</button>
+          <button class="tombol-overlay gh">Lihat Detail</button>
+        </div>
+      </div>
+      <div class="info-produk">
+        <div class="kat-produk">Bawahan</div>
+        <div class="nama-produk">Wide Leg Trousers</div>
+        <div class="harga-wrap"><span class="harga">Rp299.000</span></div>
+        <div class="rating-baris"><span class="bintang-kecil">★★★★★</span><span>(201 ulasan)</span></div>
+      </div>
+    </div>
+
+    <div class="kartu-produk" data-kategori="atasan">
+      <div class="foto-produk-wrap">
+        <span class="badge-produk baru">Baru</span>
+        <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=80&fit=crop" alt="Graphic Tee Series">
+        <div class="overlay-produk">
+          <button class="tombol-overlay">Tambah ke Keranjang</button>
+          <button class="tombol-overlay gh">Lihat Detail</button>
+        </div>
+      </div>
+      <div class="info-produk">
+        <div class="kat-produk">Atasan</div>
+        <div class="nama-produk">Graphic Tee Series</div>
+        <div class="harga-wrap"><span class="harga">Rp165.000</span></div>
+        <div class="rating-baris"><span class="bintang-kecil">★★★★★</span><span>(138 ulasan)</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 5. TESTIMONI ── -->
+<section id="testimoni">
+  <div class="judul-seksi-tengah">
+    <p class="eyebrow eyebrow-kuning">Ulasan Pelanggan</p>
+    <h2>MEREKA UDAH<br>BUKTIIN</h2>
+  </div>
+  <div class="grid-testi">
+    <div class="kartu-testi">
+      <div class="bintang">★★★★★</div>
+      <p class="teks-testi">"Beneran surprised sama kualitasnya. Bahannya adem, jahitan rapi, dan desainnya unik banget. Nggak nyesel belanja di sini!"</p>
+      <div class="pngguna">
+        <div class="avatar-foto"><img src="https://i.pravatar.cc/84?img=11" alt="Rizky"></div>
+        <div><div class="nama-testi">Rizky Aditya</div><div class="handle-testi">@rizky.drip · Jakarta</div></div>
+      </div>
+    </div>
+    <div class="kartu-testi">
+      <div class="bintang">★★★★★</div>
+      <p class="teks-testi">"Udah order 3x dan tiap kali selalu puas. Packagingnya kece, produknya sesuai foto, pengiriman cepat banget. Sangat direkomendasikan!"</p>
+      <div class="pngguna">
+        <div class="avatar-foto"><img src="https://i.pravatar.cc/84?img=5" alt="Sari"></div>
+        <div><div class="nama-testi">Sari Wulandari</div><div class="handle-testi">@sariwulan.id · Bandung</div></div>
+      </div>
+    </div>
+    <div class="kartu-testi">
+      <div class="bintang">★★★★★</div>
+      <p class="teks-testi">"Akhirnya nemu brand lokal yang legit! Harganya masuk akal banget buat kualitas sekelas ini. Panduan gayanya juga sangat membantu."</p>
+      <div class="pngguna">
+        <div class="avatar-foto"><img src="https://i.pravatar.cc/84?img=53" alt="Fadhil"></div>
+        <div><div class="nama-testi">Fadhil Maulana</div><div class="handle-testi">@fadhilm.fits · Surabaya</div></div>
+      </div>
+    </div>
+    <div class="kartu-testi">
+      <div class="bintang">★★★★★</div>
+      <p class="teks-testi">"Di kampus langsung banyak yang nanya beli di mana. Emang terbatas jadi nggak bakal ketemu orang yang sama. Kerennn! 🔥"</p>
+      <div class="pngguna">
+        <div class="avatar-huruf">A</div>
+        <div><div class="nama-testi">Andi Pratama</div><div class="handle-testi">@andiap.style · Yogyakarta</div></div>
+      </div>
+    </div>
+    <div class="kartu-testi">
+      <div class="bintang">★★★★★</div>
+      <p class="teks-testi">"Layanan pelanggannya cepat dan ramah banget. Ada masalah kecil langsung diselesaikan tanpa ribet. Ini yang bikin aku setia!"</p>
+      <div class="pngguna">
+        <div class="avatar-foto"><img src="https://i.pravatar.cc/84?img=9" alt="Nadia"></div>
+        <div><div class="nama-testi">Nadia Kusuma</div><div class="handle-testi">@nadiakristy · Medan</div></div>
+      </div>
+    </div>
+    <div class="kartu-testi">
+      <div class="bintang">★★★★★</div>
+      <p class="teks-testi">"Celana cargo-nya keren banget. Banyak kantong, bahan tebal tapi ringan, dan ukurannya pas. 10/10 pasti beli lagi bulan depan!"</p>
+      <div class="pngguna">
+        <div class="avatar-huruf">B</div>
+        <div><div class="nama-testi">Bagas Triyono</div><div class="handle-testi">@bagastrend · Semarang</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. TENTANG KAMI ── -->
+<section id="tentang">
+  <div class="tentang-visual">
+    <div class="foto-grid">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80&fit=crop" alt="toko vybe">
+      <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=600&q=80&fit=crop" alt="koleksi vybe">
+      <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80&fit=crop" alt="proses produksi">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80&fit=crop" alt="outfit vybe">
+    </div>
+    <div class="tengah-label">
+      <div class="tengah-label-box">
+        <span>VYBE</span>
+        <p>Sejak 2022 · Buatan Indonesia</p>
+      </div>
+    </div>
+  </div>
+  <div class="tentang-konten">
+    <p class="eyebrow eyebrow-redup">Tentang Kami</p>
+    <h2>KAMI BUKAN<br>BRAND BIASA</h2>
+    <p>VYBE lahir dari frustrasi anak muda Indonesia yang bosan sama fashion monoton dan mahal. Kami percaya setiap orang berhak tampil keren tanpa harus menguras kantong.</p>
+    <p>Tim kami adalah anak muda juga — desainer, fotografer, dan pecinta fashion yang benar-benar ngerti apa yang kalian mau. Setiap produk dibuat dengan riset dan cinta.</p>
+    <div class="angka-tentang">
+      <div class="angka-item"><span>2022</span><span>Berdiri</span></div>
+      <div class="angka-item"><span>15K+</span><span>Pelanggan</span></div>
+      <div class="angka-item"><span>30+</span><span>Kota</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 7. FAQ ── -->
+<section id="faq">
+  <div class="faq-kiri">
+    <p class="eyebrow eyebrow-redup">Pertanyaan Umum</p>
+    <h2>MASIH<br>ADA<br>YANG<br>DITANYA?</h2>
+    <p>Nggak nemu jawabannya di sini? Hubungi kami langsung di Instagram @vybe.id atau WhatsApp kami ya.</p>
+    <button class="tombol-utama" style="margin-top:28px" onclick="window.open('https://wa.me/62','_blank')">Chat WhatsApp Kami</button>
+  </div>
+  <div class="daftar-faq">
+    <div class="item-faq buka">
+      <div class="pertanyaan-faq" onclick="bukaTutupFaq(this)">
+        Berapa lama pengiriman setelah pesan? <span class="ikon-faq">+</span>
+      </div>
+      <div class="jawaban-faq">Pesanan diproses dalam 1×24 jam setelah pembayaran dikonfirmasi. Pengiriman ke Jawa 2–3 hari kerja, luar Jawa 3–5 hari kerja tergantung ekspedisi yang dipilih.</div>
+    </div>
+    <div class="item-faq">
+      <div class="pertanyaan-faq" onclick="bukaTutupFaq(this)">
+        Gimana kalau ukurannya nggak cocok? <span class="ikon-faq">+</span>
+      </div>
+      <div class="jawaban-faq">Tenang! Kamu bisa retur atau tukar ukuran dalam 7 hari setelah barang diterima. Syaratnya produk masih baru, belum dicuci, dan label masih ada. Biaya pengiriman retur ditanggung VYBE.</div>
+    </div>
+    <div class="item-faq">
+      <div class="pertanyaan-faq" onclick="bukaTutupFaq(this)">
+        Apakah ada diskon untuk pembelian pertama? <span class="ikon-faq">+</span>
+      </div>
+      <div class="jawaban-faq">Ada! Daftar newsletter sekarang dan dapatkan diskon 15% untuk pembelian pertama. Member juga dapat akses drop eksklusif lebih awal sebelum dijual ke publik.</div>
+    </div>
+    <div class="item-faq">
+      <div class="pertanyaan-faq" onclick="bukaTutupFaq(this)">
+        Metode pembayaran apa yang tersedia? <span class="ikon-faq">+</span>
+      </div>
+      <div class="jawaban-faq">Kami menerima transfer bank (BCA, Mandiri, BNI, BRI), GoPay, OVO, DANA, ShopeePay, kartu kredit/debit, dan COD untuk area tertentu di Jabodetabek.</div>
+    </div>
+    <div class="item-faq">
+      <div class="pertanyaan-faq" onclick="bukaTutupFaq(this)">
+        Apakah bisa pesan custom atau pre-order? <span class="ikon-faq">+</span>
+      </div>
+      <div class="jawaban-faq">Pre-order tersedia untuk koleksi tertentu yang diumumkan di Instagram. Pesanan custom tersedia minimal 50 pcs untuk keperluan perusahaan atau komunitas dengan harga khusus.</div>
+    </div>
+    <div class="item-faq">
+      <div class="pertanyaan-faq" onclick="bukaTutupFaq(this)">
+        Bagaimana cara jadi reseller VYBE? <span class="ikon-faq">+</span>
+      </div>
+      <div class="jawaban-faq">Program reseller terbuka untuk siapa saja! DM Instagram @vybe.id dengan subjek "Reseller". Minimum pembelian 10 pcs per transaksi dengan harga spesial dan komisi menarik.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 8. CTA (UPDATED: SIAP JADI PUSAT PERHATIAN) ── -->
+<!-- ── 8. CTA (FIXED VERSION) ── -->
+<section id="cta">
+  <p class="label-cta">Penawaran Terbatas</p>
+  <h2 class="judul-cta">SIAP JADI<br>PUSAT PERHATIAN?</h2>
+  <p class="sub-cta">Daftar sekarang dan dapatkan akses eksklusif ke koleksi terbatas + diskon 15% untuk pembelian pertama lo.</p>
+  <div class="form-cta">
+    <input type="email" 
+           placeholder="Masukkan email kamu..." 
+           id="emailInput"
+           style="pointer-events: auto; opacity: 1; z-index: 999;">
+    <button onclick="kirimForm()" 
+            style="pointer-events: auto; cursor: pointer; z-index: 999;">
+            Kirimkan Diskon →
+    </button>
+  </div>
+  <p class="garansi-cta" id="formMessage">🔒 Tanpa spam. Bisa berhenti kapan saja. Data kamu aman bersama kami.</p>
+</section>
+
+<script>
+// PASTIKAN fungsi ini ADA dan TIDAK bentrok dengan fungsi lain
+function kirimForm() {
+    console.log('Fungsi kirimForm dipanggil!'); // Untuk debugging
+    
+    // Ambil element
+    const input = document.getElementById('emailInput');
+    const message = document.getElementById('formMessage');
+    
+    // Cek apakah input ditemukan
+    if (!input) {
+        console.error('Element emailInput tidak ditemukan!');
+        return;
+    }
+    
+    const email = input.value.trim();
+    
+    // Reset pesan sebelumnya
+    message.style.color = '';
+    
+    // Validasi kosong
+    if (email === '') {
+        message.innerHTML = '❌ Email tidak boleh kosong!';
+        message.style.color = '#d93025';
+        input.style.border = '2px solid #d93025';
+        input.focus();
+        return;
+    }
+    
+    // Validasi format email
+    if (!email.includes('@') || !email.includes('.') || email.indexOf('@') === 0) {
+        message.innerHTML = '❌ Masukkan email yang valid (contoh: nama@email.com)';
+        message.style.color = '#d93025';
+        input.style.border = '2px solid #d93025';
+        input.focus();
+        return;
+    }
+    
+    // Jika berhasil
+    message.innerHTML = '✅ Berhasil! Kode diskon sudah dikirim ke ' + email;
+    message.style.color = '#2e7d32';
+    input.style.border = 'none';
+    input.value = '';
+    
+    // Reset pesan setelah 3 detik
+    setTimeout(() => {
+        if (message) {
+            message.innerHTML = '🔒 Tanpa spam. Bisa berhenti kapan saja. Data kamu aman bersama kami.';
+            message.style.color = '';
+        }
+    }, 4000);
+    
+    console.log('Email valid terkirim:', email);
+    // Di sini Anda bisa tambahkan kode untuk kirim ke server
+    
+    return true;
+}
+
+// Test di console
+console.log('Script CTA loaded');
+console.log('kirimForm function:', typeof kirimForm);
+</script>
+
+<!-- ── 9. FOOTER ── -->
+<footer>
+  <div class="footer-atas">
+    <div class="footer-brand">
+      <a href="#" class="logo">VYBE</a>
+      <p>Fashion untuk anak muda Indonesia yang nggak mau jadi biasa. Tampil berani, bebas, dan jadi diri sendiri.</p>
+      <div class="sosial-footer">
+        <a class="btn-sosial" href="#" title="Instagram">IG</a>
+        <a class="btn-sosial" href="#" title="TikTok">TK</a>
+        <a class="btn-sosial" href="#" title="Twitter">X</a>
+        <a class="btn-sosial" href="#" title="WhatsApp">WA</a>
+        <a class="btn-sosial" href="#" title="Shopee">🛍</a>
+      </div>
+    </div>
+    <div class="kol-footer">
+      <h5>Produk</h5>
+      <ul>
+        <li><a href="#">Koleksi Terbaru</a></li>
+        <li><a href="#">Atasan &amp; Kaos</a></li>
+        <li><a href="#">Outer &amp; Jaket</a></li>
+        <li><a href="#">Bawahan</a></li>
+        <li><a href="#">Aksesori</a></li>
+      </ul>
+    </div>
+    <div class="kol-footer">
+      <h5>Informasi</h5>
+      <ul>
+        <li><a href="#">Tentang VYBE</a></li>
+        <li><a href="#">Cara Belanja</a></li>
+        <li><a href="#">Panduan Ukuran</a></li>
+        <li><a href="#">Program Reseller</a></li>
+        <li><a href="#">Karir</a></li>
+      </ul>
+    </div>
+    <div class="kol-footer">
+      <h5>Bantuan</h5>
+      <ul>
+        <li><a href="#">Pertanyaan Umum</a></li>
+        <li><a href="#">Lacak Pesanan</a></li>
+        <li><a href="#">Retur &amp; Pengembalian</a></li>
+        <li><a href="#">Hubungi Kami</a></li>
+        <li><a href="#">Kebijakan Privasi</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bawah">
+    <p>© 2025 VYBE Indonesia. Seluruh hak dilindungi undang-undang.</p>
+    <p>Dibuat dengan 🔥 untuk anak muda Indonesia · <a href="#">Syarat &amp; Ketentuan</a></p>
+  </div>
+</footer>
+
+<script>
+function bukaMenu() {
+  document.getElementById('menuMob').classList.add('buka');
+  document.getElementById('overlay').classList.add('buka');
+}
+function tutupMenu() {
+  document.getElementById('menuMob').classList.remove('buka');
+  document.getElementById('overlay').classList.remove('buka');
+}
+
+function bukaTutupFaq(el) {
+  const item = el.parentElement;
+  const sudahBuka = item.classList.contains('buka');
+  document.querySelectorAll('.item-faq').forEach(i => i.classList.remove('buka'));
+  if (!sudahBuka) item.classList.add('buka');
+}
+
+function filterProduk(btn, kategori) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('aktif'));
+  btn.classList.add('aktif');
+  document.querySelectorAll('.kartu-produk').forEach((k, i) => {
+    const tampil = kategori === 'semua' || k.dataset.kategori === kategori;
+    k.style.display = tampil ? '' : 'none';
+    if (tampil) {
+      k.style.opacity = '0'; k.style.transform = 'scale(.95)';
+      k.style.transition = `opacity .35s ${i*0.04}s, transform .35s ${i*0.04}s`;
+      requestAnimationFrame(() => { k.style.opacity = '1'; k.style.transform = 'scale(1)'; });
+    }
+  });
+}
+
+function kirimForm() {
+  const input = document.getElementById('emailInput');
+  if (input.value && input.value.includes('@')) {
+    input.value = '';
+    input.placeholder = '✅ Berhasil! Cek inbox kamu ya.';
+    setTimeout(() => { input.placeholder = 'Masukkan email kamu...'; }, 3500);
+  } else {
+    input.style.outline = '2px solid #d93025';
+    input.placeholder = 'Masukkan email yang valid ya!';
+    setTimeout(() => { input.style.outline = 'none'; input.placeholder = 'Masukkan email kamu...'; }, 2000);
+  }
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.kartu-layanan,.kartu-testi,.kartu-produk,.kartu,.item-faq').forEach((el, i) => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(22px)';
+  el.style.transition = `opacity .5s ${i*0.04}s, transform .5s ${i*0.04}s`;
+  obs.observe(el);
+});
+
+// Navbar shadow on scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').style.boxShadow =
+    window.scrollY > 20 ? '0 4px 32px rgba(0,0,0,.7)' : 'none';
+});
+</script>
+</body>
+</html>
